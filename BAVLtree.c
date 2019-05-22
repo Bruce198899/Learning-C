@@ -245,34 +245,34 @@ int main()
 			{
 				AvlTree cursor=root;
 				int state=0;
-				while(Weight(cursor)>x)
+				while(Weight(cursor)>=x)
 				{
-					if(x==Weight(cursor->m_pLeft)+1) {cout<<cursor->data<<endl;state=1;break;}
-					else if(Weight(cursor->m_pLeft)>x) cursor=cursor->m_pLeft;
+					if(x==Weight(cursor->m_pLeft)+1) {break;}
+					else if(Weight(cursor)==x)  {cursor=avltree_maximum(cursor);break;}
+					else if(Weight(cursor->m_pLeft)>=x) cursor=cursor->m_pLeft;
 					else 
 					{
 						x-=Weight(cursor->m_pLeft)+1;
 						cursor=cursor->m_pRight;
 					};
 				}
-				cursor=avltree_maximum(cursor);
-				if(state==0) cout<<cursor->data<<endl;
+				cout<<cursor->data<<endl;
 				break;	
 			}
 		default://编号第x的员工是第几小
 			{
-				int number=1;
+				int number=0;
 				AvlTree cursor=root;
 				while(cursor->data!=x)
 				{
 					if(cursor->data>x) {cursor=cursor->m_pLeft;}
-					else{number+=cursor->m_pLeft->weight+1;cursor=cursor->m_pRight;}
+					else{number+=Weight(cursor->m_pLeft)+1;cursor=cursor->m_pRight;}
 				}
-				number+=Weight(cursor->m_pLeft);
+				number+=Weight(cursor->m_pLeft)+1;
 				cout<<number<<endl;
 				break;
 			}
 		}
 	}
 	return 0;
-}
+}	
