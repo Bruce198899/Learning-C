@@ -55,7 +55,7 @@ int Max(int a,int b)
 {return a>b?a:b;}
 int Height( AvlTree T)
 {
-	if(NULL == T)return 1;
+	if(NULL == T)return -1;
 	else return T->height;
 }
 int Weight(AvlTree T)
